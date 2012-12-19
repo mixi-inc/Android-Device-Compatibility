@@ -1,7 +1,7 @@
 Android Device Compatibility Package
 ======
 
-Licence
+License
 -------
 
 Copyright (C) 2012 mixi, Inc. All rights reserved.
