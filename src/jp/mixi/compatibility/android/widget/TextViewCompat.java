@@ -13,13 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-
 package jp.mixi.compatibility.android.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+/**
+ * Workaround for the following issue of {@link TextView}.
+ * - Issue #6716343
+ * -- Reported at: http://code.google.com/p/android/issues/detail?id=35259
+ * -- Reported at: http://code.google.com/p/android/issues/detail?id=35466
+ */
 public class TextViewCompat extends TextView {
 
     public TextViewCompat(Context context, AttributeSet attrs, int defStyle) {
