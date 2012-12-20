@@ -25,6 +25,9 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * Workaround helper for the issue of {@link SharedPreferences} with Galaxy S.
+ */
 public class SharedPreferencesCompat {
     public static final String TAG = SharedPreferencesCompat.class.getSimpleName();
     private static final String SAMSUNG_PREF_DIR_BASE = "/dbdata/databases";
@@ -34,7 +37,7 @@ public class SharedPreferencesCompat {
      * As a workaround for Galaxy S /dbdata/databases permission bug, this
      * function will make an injection to the implementation of Context to
      * change a directory used by SharedPreferences. Called from
-     * {@link MixiSession#onCreate()} when the application starts.
+     * {@link YourApplication#onCreate()} when the application starts.
      * 
      * @param context injection target context.
      */
@@ -43,14 +46,25 @@ public class SharedPreferencesCompat {
             injectPreferencesDir(context);
     }
 
+    /**
+     * Wrapper method of getting default shared preferences.
+     */
     public static SharedPreferences getDefaultSharedPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
     }
 
+    /**
+     * Wrapper method of getting shared preferences.
+     */
     public static SharedPreferences getSharedPreferences(Context context, String name, int mode) {
         return context.getApplicationContext().getSharedPreferences(name, mode);
     }
 
+    /**
+     * Checks whether we should inject to the implementation of Context for workaround or not.
+     *
+     * @return true if we've lost a permission to deal with shared preferences directory
+     */
     public static boolean isNeedPreferenceWorkaround(Context context) {
         if (sIsNeedPreferenceWorkaround == null) {
             File baseDir = new File(SAMSUNG_PREF_DIR_BASE, context.getPackageName());
