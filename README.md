@@ -1,6 +1,15 @@
 Android Device Compatibility Package
 ======
 
+Yet another compatibility package of android.
+
+Features
+-------
+
+* Workarounds for device-specific problems
+* OS version compatibility
+* OS framework bugfixes
+
 License
 -------
 
