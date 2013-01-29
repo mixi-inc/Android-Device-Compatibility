@@ -1,4 +1,4 @@
-package jp.mixi.compatibility.test;
+package jp.mixi.compatibility.android.widget;
 
 import android.test.AndroidTestCase;
 import android.widget.ArrayAdapter;
