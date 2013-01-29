@@ -1,4 +1,4 @@
-package jp.mixi.compatibility.test;
+package jp.mixi.compatibility.android.text;
 
 import java.util.Date;
 
