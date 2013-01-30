@@ -85,7 +85,7 @@ public class MediaStoreCompat {
      * @return true if the device has a camera feature. false otherwise.
      */
     public boolean hasCameraFeature(Context context) {
-        PackageManager pm = context.getApplicationContext().getPackageManager();                                                                                                                        
+        PackageManager pm = context.getApplicationContext().getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 
@@ -353,7 +353,7 @@ public class MediaStoreCompat {
                 MEDIA_FILE_DIRECTORY);
 
         if (!extDir.exists()) {
-            if (!extDir.mkdir()) return null;
+            if (!extDir.mkdirs()) return null;
         }
 
         String timeStamp = new SimpleDateFormat(MEDIA_FILE_NAME_FORMAT).format(new Date());
