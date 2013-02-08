@@ -10,6 +10,12 @@ Features
 * OS version compatibility
 * OS framework bugfixes
 
+Contributing
+-------
+
+Any contributions, bug fixes, unit/integration tests are welcomed and appreciated.
+Please fork this repository and send pull requests to contribute.
+
 License
 -------
 
