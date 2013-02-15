@@ -10,6 +10,11 @@ Features
 * OS version compatibility
 * OS framework bugfixes
 
+Requirements
+-------
+
+* Supports Android 2.1 or greater.
+
 Contributing
 -------
 
