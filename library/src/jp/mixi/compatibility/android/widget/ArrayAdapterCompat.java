@@ -24,13 +24,17 @@ import java.util.Collection;
 /**
  * Compatibility class for a difference of android framework API levels.
  */
-public class ArrayAdapterCompat {
+public final class ArrayAdapterCompat {
+    /**
+     * Do not instantiate this class.
+     */
     private ArrayAdapterCompat() {}
 
     /**
      * Add all elements in the collection to the end of the adapter.
-     * @param adapter to be added
-     * @param list to add all elements
+     * @param adapter to be added.
+     * @param list to add all elements.
+     * @param <T> generic type for the collection.
      */
     @SuppressLint("NewApi")
     public static final <T> void addAll(ArrayAdapter<T> adapter, Collection<? extends T> list) {
@@ -46,7 +50,8 @@ public class ArrayAdapterCompat {
     /**
      * Add all elements in the array to the end of the adapter.
      * @param adapter to be added
-     * @param list to add all elements
+     * @param array to add all elements
+     * @param <T> generic type for an array.
      */
     @SuppressLint("NewApi")
     public static final <T> void addAll(ArrayAdapter<T> adapter, T... array) {
