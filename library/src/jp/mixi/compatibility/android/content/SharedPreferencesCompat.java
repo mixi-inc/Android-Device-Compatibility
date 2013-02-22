@@ -28,17 +28,22 @@ import java.lang.reflect.Method;
 /**
  * Workaround helper for the issue of {@link SharedPreferences} with Galaxy S.
  */
-public class SharedPreferencesCompat {
+public final class SharedPreferencesCompat {
     public static final String TAG = SharedPreferencesCompat.class.getSimpleName();
     private static final String SAMSUNG_PREF_DIR_BASE = "/dbdata/databases";
     private static Boolean sIsNeedPreferenceWorkaround = null;
+
+    /**
+     * Do not instantiate this class.
+     */
+    private  SharedPreferencesCompat() {}
 
     /**
      * As a workaround for Galaxy S /dbdata/databases permission bug, this
      * function will make an injection to the implementation of Context to
      * change a directory used by SharedPreferences. Called from
      * {@link YourApplication#onCreate()} when the application starts.
-     * 
+     *
      * @param context injection target context.
      */
     public static void injectPrefencesDirIfNeeded(Context context) {
@@ -48,6 +53,9 @@ public class SharedPreferencesCompat {
 
     /**
      * Wrapper method of getting default shared preferences.
+     *
+     * @param context a context
+     * @return the default shared preferences.
      */
     public static SharedPreferences getDefaultSharedPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
@@ -55,6 +63,11 @@ public class SharedPreferencesCompat {
 
     /**
      * Wrapper method of getting shared preferences.
+     *
+     * @param context a context
+     * @param name a preference name.
+     * @param mode operating mode.
+     * @return a {@link SharedPreferences} for a specified name.
      */
     public static SharedPreferences getSharedPreferences(Context context, String name, int mode) {
         return context.getApplicationContext().getSharedPreferences(name, mode);
@@ -63,7 +76,8 @@ public class SharedPreferencesCompat {
     /**
      * Checks whether we should inject to the implementation of Context for workaround or not.
      *
-     * @return true if we've lost a permission to deal with shared preferences directory
+     * @param context a context that should be investigated.
+     * @return true if we've lost a permission to deal with shared preferences directory.
      */
     public static boolean isNeedPreferenceWorkaround(Context context) {
         if (sIsNeedPreferenceWorkaround == null) {
@@ -76,6 +90,11 @@ public class SharedPreferencesCompat {
         return sIsNeedPreferenceWorkaround.booleanValue();
     }
 
+    /**
+     * Injects {@link SharedPreferences} directory to enable using proper {@link SharedPreferences}.
+     *
+     * @param context a context.
+     */
     private static void injectPreferencesDir(Context context) {
         if (ContextWrapper.class.isInstance(context)) {
             ContextWrapper wrapper = (ContextWrapper) context;
