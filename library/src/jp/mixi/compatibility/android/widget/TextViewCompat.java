@@ -26,15 +26,29 @@ import android.widget.TextView;
  * -- Reported at: http://code.google.com/p/android/issues/detail?id=35466
  */
 public class TextViewCompat extends TextView {
-
+    /**
+     * Initialize text view for a specified context.
+     * @param context a context for this view
+     * @param attrs attributes for this view
+     * @param defStyle styles for this view
+     */
     public TextViewCompat(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
+    /**
+     * Initialize text view for a specified context.
+     * @param context a context for this view
+     * @param attrs attributes for this view
+     */
     public TextViewCompat(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+    /**
+     * Initialize text view for a specified context.
+     * @param context a context for this view
+     */
     public TextViewCompat(Context context) {
         super(context);
     }

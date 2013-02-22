@@ -22,10 +22,15 @@ import android.os.Build;
  *
  * @author keishin.yokomaku
  */
-public class FelicaCompat {
+public final class FelicaCompat {
     public static final String[] FELICA_PUSH_UNSUPPORTED_MODELS = new String[] {
         "IS04", "T-01C"
     };
+
+    /**
+     * Do not instantiate this class.
+     */
+    private FelicaCompat() {}
 
     /**
      * Checks whether FeliCa push feature is available or not.

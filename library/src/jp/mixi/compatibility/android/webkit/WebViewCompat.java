@@ -23,7 +23,7 @@ import java.net.URLEncoder;
 /**
  * Compatibility class for the issue of various implementations of WebView.
  */
-public class WebViewCompat {
+public final class WebViewCompat {
     /**
      * Do not instantiate this.
      */
@@ -35,9 +35,10 @@ public class WebViewCompat {
      * Some devices cannot render with a un-url-encoded html text,
      * as {@link WebView#loadData(String, String, String)} will load html data as a data scheme url,
      * so we need to url-encode html text before loading html data.
+     * @param webview a webview to load the data.
      * @param data the html data.
-     * @param mimeType
-     * @param encoding
+     * @param mimeType a mime type of the data.
+     * @param encoding an encoding of the data.
      * @throws UnsupportedEncodingException if a specified encoding is not supported.
      */
     public static final void loadData(WebView webview, String data, String mimeType, String encoding) throws UnsupportedEncodingException {

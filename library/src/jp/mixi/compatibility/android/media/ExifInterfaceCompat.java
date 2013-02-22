@@ -22,7 +22,10 @@ import java.io.IOException;
 /**
  * Bug fixture for ExifInterface constructor.
  */
-public class ExifInterfaceCompat {
+public final class ExifInterfaceCompat {
+    /**
+     * Do not instantiate this class.
+     */
     private ExifInterfaceCompat() {}
 
     /**
@@ -30,6 +33,10 @@ public class ExifInterfaceCompat {
      * Original constructor won't check filename value, so if null value has been passed,
      * the process will be killed because of SIGSEGV.
      * Google Play crash report system cannot perceive this crash, so this method will throw {@link NullPointerException} when the filename is null.
+     *
+     * @param filename a JPEG filename.
+     * @return {@link ExifInterface} instance.
+     * @throws IOException something wrong with I/O.
      */
     public static final ExifInterface newInstance(String filename) throws IOException {
         if (filename == null) throw new NullPointerException("filename should not be null");

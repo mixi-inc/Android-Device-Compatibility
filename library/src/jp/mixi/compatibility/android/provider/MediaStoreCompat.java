@@ -34,6 +34,8 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 
+import jp.mixi.compatibility.android.media.ExifInterfaceCompat;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -63,8 +65,8 @@ public class MediaStoreCompat {
      * Prepares to deal with various implementations of camera feature and {@link MediaStore}.
      * You should call {@link MediaStoreCompat#destroy()} on destroying context.
      *
-     * @param context
-     * @param handler
+     * @param context a context
+     * @param handler a handler
      */
     public MediaStoreCompat(Context context, Handler handler) {
         mContext = context;
@@ -81,7 +83,7 @@ public class MediaStoreCompat {
 
     /**
      * Checks whether the device has a camera feature or not.
-     * @param context
+     * @param context a context to check for camera feature.
      * @return true if the device has a camera feature. false otherwise.
      */
     public boolean hasCameraFeature(Context context) {
@@ -91,8 +93,8 @@ public class MediaStoreCompat {
 
     /**
      * Invokes a camera capture activity.
-     * @param activity the caller of the camera capture activity
-     * @param requestCode
+     * @param activity the caller of the camera capture activity.
+     * @param requestCode activity result handling id.
      * @return a file name to be saved as.
      */
     public String invokeCameraCapture(Activity activity, int requestCode) {
@@ -118,7 +120,7 @@ public class MediaStoreCompat {
 
     /**
      * @param data the result {@link Intent} of a camera activity.
-     * @param preparedUri
+     * @param preparedUri a prepared photo uri to fetch photo data.
      * @return captured photo {@link Uri}
      */
     public Uri getCapturedPhotoUri(Intent data, String preparedUri) {
@@ -159,8 +161,8 @@ public class MediaStoreCompat {
 
     /**
      * Obtains a captured photo file path from content {@link Uri} of a {@link MediaStore}
-     * @param resolver
-     * @param contentUri
+     * @param resolver a content resolver
+     * @param contentUri a content uri
      * @return captured photo file path string
      */
     public static String getPathFromUri(ContentResolver resolver, Uri contentUri) {
@@ -177,6 +179,13 @@ public class MediaStoreCompat {
         }
     }
 
+    /**
+     * Copies file streams.
+     * @param is input stream
+     * @param os output stream
+     * @return the number of bytes.
+     * @throws IOException if something wrong with I/O.
+     */
     public static long copyFileStream(FileInputStream is, FileOutputStream os)
             throws IOException {
         FileChannel srcChannel = null;
@@ -191,6 +200,11 @@ public class MediaStoreCompat {
         }
     }
 
+    /**
+     * Obtains file {@link Uri} that refers to a recently taken photo.
+     * @param file to search
+     * @return photo file uri.
+     */
     private Uri findPhotoFromRecentlyTaken(File file) {
         if (mRecentlyUpdatedPhotos == null)
             updateLatestPhotos();
@@ -220,6 +234,12 @@ public class MediaStoreCompat {
         return null;
     }
 
+    /**
+     * Stores a file to media store with photo orientation and date that taken.
+     *
+     * @param file to store
+     * @return a stored file uri
+     */
     private Uri storeImage(File file) {
         // store image to content provider
         try {
@@ -253,6 +273,9 @@ public class MediaStoreCompat {
         }
     }
 
+    /**
+     * Request to update latest photos onto media store.
+     */
     private void updateLatestPhotos() {
         // retrieve the newest five images
         Cursor c = MediaStore.Images.Media.query(mContext.getContentResolver(),
@@ -280,16 +303,19 @@ public class MediaStoreCompat {
         }
     }
 
+    /**
+     * Read exif info and get orientation value of the photo.
+     * @param filepath to get exif.
+     * @return exif orientation value
+     */
     private int getExifOrientation(String filepath) {
-        // ExifInterface does not check whether file path is null or not,
-        // so passing null file path argument to its constructor causing SIGSEGV.
-        // We should avoid such a situation by checking file path string.
-        if (filepath == null) return 0;
-
         int degree = 0;
         ExifInterface exif = null;
         try {
-            exif = new ExifInterface(filepath);
+            // ExifInterface does not check whether file path is null or not,
+            // so passing null file path argument to its constructor causing SIGSEGV.
+            // We should avoid such a situation by checking file path string.
+            exif = ExifInterfaceCompat.newInstance(filepath);
         } catch (IOException ex) {
             Log.e(TAG, "cannot read exif", ex);
         }
@@ -307,6 +333,9 @@ public class MediaStoreCompat {
                     case ExifInterface.ORIENTATION_ROTATE_270:
                         degree = 270;
                         break;
+                    default:
+                        // do nothing.
+                        break;
                 }
 
             }
@@ -314,10 +343,18 @@ public class MediaStoreCompat {
         return degree;
     }
 
+    /**
+     * Read exif info and get datetime value of the photo.
+     * @param filepath to get datetime
+     * @return when a photo taken.
+     */
     private long getExifDateTime(String filepath) {
         ExifInterface exif = null;
         try {
-            exif = new ExifInterface(filepath);
+            // ExifInterface does not check whether file path is null or not,
+            // so passing null file path argument to its constructor causing SIGSEGV.
+            // We should avoid such a situation by checking file path string.
+            exif = ExifInterfaceCompat.newInstance(filepath);
         } catch (IOException ex) {
             Log.e(TAG, "cannot read exif", ex);
         }
@@ -336,6 +373,11 @@ public class MediaStoreCompat {
         return -1;
     }
 
+    /**
+     * Create thumbnail images for a specified photo image.
+     *
+     * @param imageId referes to a photo image.
+     */
     private void generateThumbnails(long imageId) {
         try {
             MediaStore.Images.Thumbnails.getThumbnail(mContext.getContentResolver(), imageId,
@@ -345,6 +387,10 @@ public class MediaStoreCompat {
         }
     }
 
+    /**
+     * Make output file uri based on a external storage directory.
+     * @return a file
+     */
     @TargetApi(Build.VERSION_CODES.FROYO)
     private File getOutputFileUri() {
         File extDir = new File(
@@ -361,6 +407,9 @@ public class MediaStoreCompat {
                 MEDIA_FILE_PREFIX + timeStamp + MEDIA_FILE_EXTENSION);
     }
 
+    /**
+     * Entity class for photo content.
+     */
     private static class PhotoContent {
         public long id;
         public long taken;
