@@ -11,7 +11,6 @@ import android.content.pm.ResolveInfo;
 /**
  * 端末にインストールされているアプリケーションの情報に関するヘルパークラス
  * @author genichiro.sugawara
- *
  */
 public class SupportedApplicationHelper {
 	
@@ -25,8 +24,6 @@ public class SupportedApplicationHelper {
 	/** 
 	 * 指定したintentに対応したアプリケーションがインストールされているかどうかを返す
 	 * （intentでstartActivity()する前に、それが可能であるか確認する）
-	 * @param intent
-	 * @return
 	 */
 	public boolean canStartActivity(final Intent intent) {
 		List<ResolveInfo> activities = mPackageManager.queryIntentActivities(intent, 0);
