@@ -1,4 +1,4 @@
-package jp.mixi.compatibiliy.android.support;
+package jp.mixi.compatibility.android.support;
 
 import java.util.List;
 
