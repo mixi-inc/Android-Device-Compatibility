@@ -29,4 +29,13 @@ public class SupportedApplicationHelper {
 		List<ResolveInfo> activities = mPackageManager.queryIntentActivities(intent, 0);
         return !activities.isEmpty();
 	}
+	
+	/**
+	 * 指定した intent をハンドル出来る BroadcastReceiver が存在するかどうかを返す
+	 */
+	
+	public boolean canHandleIntent(final Intent intent) {
+		List<ResolveInfo> activities = mPackageManager.queryBroadcastReceivers(intent, 0);
+        return !activities.isEmpty();
+	}
 }
