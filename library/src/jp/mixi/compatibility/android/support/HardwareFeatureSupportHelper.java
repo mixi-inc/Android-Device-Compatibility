@@ -37,11 +37,11 @@ public class HardwareFeatureSupportHelper {
     }
     
     /**
-     * Return has camera facing {@link CameraInfo.CAMERA_FACING_BACK}.
+     * Check whether the device has a facing back camera.
      * 
-     *  Prevent {@link Camera.open} is null.
+     * This is useful to avoid receiving null on {@lin Camera#open()} call.
      * 
-     * @return true if has facing back camera.
+     * @return true if facing back camera is available, false otherwise.
      */
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public boolean hasFacingBackCamera() {
