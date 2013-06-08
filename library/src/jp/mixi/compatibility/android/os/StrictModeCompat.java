@@ -10,14 +10,16 @@ import java.lang.reflect.Method;
  * OS version compatibility to enable strict mode later than {@link Build#VERSION_CODES#FROYO}.
  * @author keishin.yokomaku
  */
-public class StrictModeCompat {
+public final class StrictModeCompat {
     public static final String TAG = StrictModeCompat.class.getSimpleName();
+
+    private StrictModeCompat() {}
 
     /**
      * Enable default strict mode.
      * Earlier than Gingerbread, this method will do nothing.
      */
-    public void enableDefaults() {
+    public static final void enableDefaults() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
             Log.v(TAG, "enabling StrictMode in default parameters");
             try {
