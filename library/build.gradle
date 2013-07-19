@@ -10,6 +10,13 @@ buildscript {
 
 apply plugin:'android-library'
 
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile 'com.google.android:support-v4:r7'
+    compile 'javax.inject:javax.inject:1'
+}
 android {
     compileSdkVersion 17
     buildToolsVersion "17.0.0"
@@ -30,9 +37,6 @@ android {
         instrumentTest.setRoot('library_test')
     }
 }
-dependencies {
-      compile fileTree(dir: 'libs', include: '*.jar')
-}
 tasks.withType(Compile) {
-      options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8'
 }
