@@ -18,3 +18,7 @@ local.properties
 
 # roboelectric generated files
 tmp/
+
+# Gradle files
+.gradle
+build/
