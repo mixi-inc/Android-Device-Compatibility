@@ -127,7 +127,9 @@ public class MediaStoreCompat {
         Uri captured = null;
         if (data != null) {
             captured = data.getData();
-            if (captured == null) data.getParcelableExtra(Intent.EXTRA_STREAM);
+            if (captured == null) {
+                captured = data.getParcelableExtra(Intent.EXTRA_STREAM);
+            }
         }
 
         File prepared = new File(preparedUri.toString());
