@@ -2,23 +2,48 @@
 *.apk
 *.ap_
 
-# files for the dex VM
+# Dalvik files
 *.dex
 
 # Java class files
 *.class
 
-# generated files
+# Generated files
 bin/
 gen/
+lint.xml
 proguard/
 
-# Local configuration file (sdk path, etc)
+# Local configs
 local.properties
 
-# roboelectric generated files
+# roboelectric
 tmp/
 
-# Gradle files
+# Eclipse workspace
+.metadata/
+.checkstyle
+.settings
+
+# intelli J
+.idea
+*.iml
+*.ipr
+*.iws
+
+# mac
+.Trashes
+.DS_Store
+
+# Win
+Thumbs.db
+
+# Vim
+*.swp
+
+# Keystore
+*.keystore
+
+# Gradle
 .gradle
 build/
