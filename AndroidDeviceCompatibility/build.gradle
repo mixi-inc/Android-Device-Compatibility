@@ -20,11 +20,6 @@ android {
         minSdkVersion 7
         targetSdkVersion 19
     }
-    release {
-        runProguard true
-        proguardFile 'proguard-rules.txt'
-        proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
-    }
 }
 
 tasks.withType(Compile) {
