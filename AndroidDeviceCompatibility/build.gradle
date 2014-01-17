@@ -40,7 +40,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${repos.absolutePath}"
-            pom.version = '0.1.0'
+            pom.version = '0.2.0'
             pom.groupId = 'jp.mixi.compatibility'
             pom.artifactId = 'AndroidDeviceCompatibility'
         }
