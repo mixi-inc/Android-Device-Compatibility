@@ -16,9 +16,13 @@
 package jp.mixi.compatibility.android.hardware;
 
 import android.annotation.TargetApi;
+import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.hardware.Camera;
 import android.os.Build;
 import android.util.Log;
+
+import jp.mixi.compatibility.android.hardware.exception.CameraLockedException;
 
 /**
  * Utility class for the use of hardware {@link android.hardware.Camera}.
@@ -31,17 +35,40 @@ public final class CameraCompat {
 
     /**
      * Tries to open the camera.
-     * If the camera is in use by another application, this will return null.
+     * If the camera is in use by another application, or disabled by the device admin,
+     * this method will return null.
      * @param cameraId to open
-     * @return {@link android.hardware.Camera} instance if available. null if not available for the process.
+     * @return {@link android.hardware.Camera} instance if available. null if not available for this application process.
      */
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    public static Camera tryOpen(int cameraId) {
+    public static Camera tryOpen(Context context, int cameraId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            DevicePolicyManager manager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            if (manager.getCameraDisabled(null)) {
+                return null;
+            }
+        }
         try {
             return Camera.open(cameraId);
         } catch (RuntimeException e) { // if someone has a lock for hardware camera.
-            Log.e(TAG, "someone keeps using a camera, so we cannot open the camera.", e);
+            Log.e(TAG, "It seems someone keeps using a camera, so we cannot open the camera.", e);
             return null;
+        }
+    }
+
+    /**
+     * Tries to open the camera.
+     * If the camera is in use by another application, this method will throw a {@link jp.mixi.compatibility.android.hardware.exception.CameraLockedException}.
+     * @param cameraId to open
+     * @return {@link android.hardware.Camera} instance if available.
+     * @throws CameraLockedException if the camera is not available for this application process.
+     */
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public static Camera tryOpenOrThrow(int cameraId) throws CameraLockedException {
+        try {
+            return Camera.open(cameraId);
+        } catch (RuntimeException e) {
+            throw new CameraLockedException("It seems someone keeps using a camera, or disabled by the admin of this device, so we cannot open the camera.", e);
         }
     }
 }
