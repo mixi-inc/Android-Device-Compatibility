@@ -49,8 +49,8 @@ public final class CameraCompat {
             }
         }
         try {
-            return Camera.open(cameraId);
-        } catch (RuntimeException e) { // if someone has a lock for hardware camera.
+            return tryOpenOrThrow(cameraId);
+        } catch (CameraLockedException e) { // if someone has a lock for hardware camera.
             Log.e(TAG, "It seems someone keeps using a camera, so we cannot open the camera.", e);
             return null;
         }
