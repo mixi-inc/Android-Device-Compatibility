@@ -15,6 +15,7 @@
  */
 package jp.mixi.compatibility.android.hardware;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -41,6 +42,7 @@ public final class CameraCompat {
      * @return {@link android.hardware.Camera} instance if available. null if not available for this application process.
      */
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    @SuppressLint("NewApi")
     public static Camera tryOpen(Context context, int cameraId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             DevicePolicyManager manager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
