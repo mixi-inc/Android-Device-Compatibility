@@ -1,5 +1,6 @@
 Android Device Compatibility Package
 ======
+[![Build Status](https://travis-ci.org/mixi-inc/Android-Device-Compatibility.svg?branch=master)](https://travis-ci.org/mixi-inc/Android-Device-Compatibility)
 
 Yet another compatibility package of android.
 
