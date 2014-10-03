@@ -2,7 +2,11 @@ Android Device Compatibility Package
 ======
 [![Build Status](https://travis-ci.org/mixi-inc/Android-Device-Compatibility.svg?branch=master)](https://travis-ci.org/mixi-inc/Android-Device-Compatibility)
 
-Yet another compatibility package of android.
+Yet another compatibility package of android. This project aims to make the app compatible with various devices all over the world.
+The project will take care about lots of issues caused by device differences, so you don't need to write a weird compatibility code on your own.
+
+~[](https://farm5.staticflickr.com/4032/4302079406_aab8748987_o_d.jpg)
+[Photo license](https://creativecommons.org/licenses/by/2.0/)
 
 Features
 -------
