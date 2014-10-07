@@ -16,6 +16,7 @@
 package jp.mixi.compatibility.android.widget;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.os.Build;
 import android.widget.ArrayAdapter;
 
@@ -28,15 +29,17 @@ public final class ArrayAdapterCompat {
     /**
      * Do not instantiate this class.
      */
-    private ArrayAdapterCompat() {}
+    private ArrayAdapterCompat() {
+    }
 
     /**
      * Add all elements in the collection to the end of the adapter.
+     *
      * @param adapter to be added.
-     * @param list to add all elements.
-     * @param <T> generic type for the collection.
+     * @param list    to add all elements.
+     * @param <T>     generic type for the collection.
      */
-    @SuppressLint("NewApi")
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static final <T> void addAll(ArrayAdapter<T> adapter, Collection<? extends T> list) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             adapter.addAll(list);
@@ -49,9 +52,10 @@ public final class ArrayAdapterCompat {
 
     /**
      * Add all elements in the array to the end of the adapter.
+     *
      * @param adapter to be added
-     * @param array to add all elements
-     * @param <T> generic type for an array.
+     * @param array   to add all elements
+     * @param <T>     generic type for an array.
      */
     @SuppressLint("NewApi")
     public static final <T> void addAll(ArrayAdapter<T> adapter, T... array) {
