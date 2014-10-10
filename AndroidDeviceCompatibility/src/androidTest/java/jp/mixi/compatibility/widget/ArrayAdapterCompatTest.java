@@ -24,44 +24,44 @@ public class ArrayAdapterCompatTest extends AndroidTestCase {
         list.add("foo");
         list.add("bar");
         DummyArrayAdapter<String> adapter = new DummyArrayAdapter<String>(getContext(), 0);
-        assertFalse(adapter.callAdd);
-        assertFalse(adapter.callAddAll);
+        assertFalse(adapter.calledAdd);
+        assertFalse(adapter.calledAddAll);
 
         ArrayAdapterCompat.addAll(adapter, list);
 
         assertTrue(adapter.mCollection.containsAll(list));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            assertTrue(adapter.callAddAll);
-            assertFalse(adapter.callAdd);
+            assertTrue(adapter.calledAddAll);
+            assertFalse(adapter.calledAdd);
         } else {
-            assertTrue(adapter.callAdd);
-            assertFalse(adapter.callAddAll);
+            assertTrue(adapter.calledAdd);
+            assertFalse(adapter.calledAddAll);
         }
     }
 
     public void testAddAllArray() {
         String[] list = new String[]{"foo", "bar"};
         DummyArrayAdapter<String> adapter = new DummyArrayAdapter<String>(getContext(), 0);
-        assertFalse(adapter.callAdd);
-        assertFalse(adapter.callAddAll);
+        assertFalse(adapter.calledAdd);
+        assertFalse(adapter.calledAddAll);
 
         ArrayAdapterCompat.addAll(adapter, list);
 
         assertTrue(adapter.mCollection.containsAll(Arrays.asList(list)));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            assertTrue(adapter.callAddAll);
-            assertFalse(adapter.callAdd);
+            assertTrue(adapter.calledAddAll);
+            assertFalse(adapter.calledAdd);
         } else {
-            assertTrue(adapter.callAdd);
-            assertFalse(adapter.callAddAll);
+            assertTrue(adapter.calledAdd);
+            assertFalse(adapter.calledAddAll);
         }
 
     }
 
     private class DummyArrayAdapter<T> extends ArrayAdapter<T> {
         private Collection<T> mCollection;
-        private boolean callAddAll = false;
-        private boolean callAdd = false;
+        private boolean calledAddAll = false;
+        private boolean calledAdd = false;
 
         public DummyArrayAdapter(Context context, int resource) {
             super(context, resource);
@@ -69,7 +69,7 @@ public class ArrayAdapterCompatTest extends AndroidTestCase {
 
         @Override
         public void addAll(Collection<? extends T> collection) {
-            callAddAll = true;
+            calledAddAll = true;
             if (mCollection == null) {
                 mCollection = new ArrayList<T>();
             }
@@ -78,7 +78,7 @@ public class ArrayAdapterCompatTest extends AndroidTestCase {
 
         @Override
         public void addAll(T... items) {
-            callAddAll = true;
+            calledAddAll = true;
             if (mCollection == null) {
                 mCollection = new ArrayList<T>();
             }
@@ -87,7 +87,7 @@ public class ArrayAdapterCompatTest extends AndroidTestCase {
 
         @Override
         public void add(T object) {
-            callAdd = true;
+            calledAdd = true;
             if (mCollection == null) {
                 mCollection = new ArrayList<T>();
             }
