@@ -1,5 +1,6 @@
 Android Device Compatibility Package
 ======
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/jp.mixi/AndroidDeviceCompatibility/badge.svg)](https://maven-badges.herokuapp.com/maven-central/jp.mixi/AndroidDeviceCompatibility/badge.svg)
 [![Build Status](https://travis-ci.org/mixi-inc/Android-Device-Compatibility.svg?branch=master)](https://travis-ci.org/mixi-inc/Android-Device-Compatibility)
 
 Yet another compatibility package of android. This project aims to make the app compatible with various devices all over the world.
