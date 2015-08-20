@@ -1,6 +1,6 @@
 Android Device Compatibility Package
 ======
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/jp.mixi/AndroidDeviceCompatibility/badge.svg)](https://maven-badges.herokuapp.com/maven-central/jp.mixi/AndroidDeviceCompatibility/badge.svg)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/jp.mixi/AndroidDeviceCompatibility/badge.svg)](https://maven-badges.herokuapp.com/maven-central/jp.mixi/AndroidDeviceCompatibility/)
 [![Build Status](https://travis-ci.org/mixi-inc/Android-Device-Compatibility.svg?branch=master)](https://travis-ci.org/mixi-inc/Android-Device-Compatibility)
 [![Build Status](https://circleci.com/gh/mixi-inc/Android-Device-Compatibility.svg?style=shield&circle-token=2f3ead4c64a786dbd7e87d557a815bb8eafd05af)](https://circleci.com/gh/mixi-inc/Android-Device-Compatibility/tree/master)
 [![License](http://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
