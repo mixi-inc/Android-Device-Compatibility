@@ -2,6 +2,7 @@ Android Device Compatibility Package
 ======
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/jp.mixi/AndroidDeviceCompatibility/badge.svg)](https://maven-badges.herokuapp.com/maven-central/jp.mixi/AndroidDeviceCompatibility/badge.svg)
 [![Build Status](https://travis-ci.org/mixi-inc/Android-Device-Compatibility.svg?branch=master)](https://travis-ci.org/mixi-inc/Android-Device-Compatibility)
+[![Build Status](https://circleci.com/gh/mixi-inc/Android-Device-Compatibility.svg?style=shield&circle-token=2f3ead4c64a786dbd7e87d557a815bb8eafd05af)](https://circleci.com/gh/mixi-inc/Android-Device-Compatibility/tree/master)
 
 Yet another compatibility package of android. This project aims to make the app compatible with various devices all over the world.
 The project will take care about lots of issues caused by device differences, so you don't need to write a weird compatibility code on your own.
