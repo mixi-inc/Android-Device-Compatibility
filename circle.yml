@@ -1,0 +1,24 @@
+machine:
+  java:
+    version: openjdk7
+  environment:
+    ANDROID_HOME: /usr/local/android-sdk-linux
+
+dependencies:
+  override:
+    - echo y | android update sdk --no-ui --filter "android-21,build-tools-21.1.2,extra-android-m2repository"
+
+test:
+  override:
+    # start the emulator
+    - emulator -avd circleci-android22 -no-audio -no-window:
+        background: true
+        parallel: true
+    # wait for it to have booted
+    - circle-android wait-for-boot
+    - ./gradlew connectedAndroidTest test
+    # copy the build outputs to artifacts
+    - cp -r AndroidDeviceCompatibility/build/outputs $CIRCLE_ARTIFACTS
+    # copy the test results to the test results directory.
+    - cp -r AndroidDeviceCompatibility/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+
