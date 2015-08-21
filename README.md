@@ -25,16 +25,8 @@ Download
 
 Via Gradle
 
-```
-repositories {
-    mavenCentral()
-    maven { url 'https://raw.github.com/mixi-inc/Android-Device-Compatibility/master/repository/' }
-}
-android {
-    dependencies {
-        compile 'jp.mixi.compatibility:AndroidDeviceCompatibility:0.1.0'
-    }
-}
+```groovy
+    compile 'jp.mixi:AndroidDeviceCompatibility:2.0.0'
 ```
 
 Contributing
