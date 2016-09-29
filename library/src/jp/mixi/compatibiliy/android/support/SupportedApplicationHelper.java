@@ -1,0 +1,35 @@
+package jp.mixi.compatibiliy.android.support;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+
+/**
+ * 端末にインストールされているアプリケーションの情報に関するヘルパークラス
+ * @author genichiro.sugawara
+ *
+ */
+public class SupportedApplicationHelper {
+	
+	private final PackageManager mPackageManager;
+	
+	@Inject
+	public SupportedApplicationHelper(PackageManager packageManager) {
+		mPackageManager = packageManager;
+	}
+
+	/** 
+	 * 指定したintentに対応したアプリケーションがインストールされているかどうかを返す
+	 * （intentでstartActivity()する前に、それが可能であるか確認する）
+	 * @param intent
+	 * @return
+	 */
+	public boolean canStartActivity(final Intent intent) {
+		List<ResolveInfo> activities = mPackageManager.queryIntentActivities(intent, 0);
+        return !activities.isEmpty();
+	}
+}
